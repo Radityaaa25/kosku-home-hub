@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Card, CardContent } from "@/components/ui/card";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+
 import { Home, Lock, Mail } from "lucide-react";
 import { toast } from "sonner";
 import type { Role } from "@/lib/types";
@@ -25,7 +25,14 @@ function LoginPage() {
   const navigate = useNavigate();
   const [email, setEmail] = useState("admin@kosku.id");
   const [password, setPassword] = useState("demo1234");
-  const [role, setRoleLocal] = useState<Role>("owner");
+
+  // Demo credential map — in a real app, role is resolved server-side from
+  // the authenticated user, never selected by the client.
+  const DEMO_USERS: Record<string, { password: string; role: Role; label: string }> = {
+    "admin@kosku.id": { password: "demo1234", role: "owner", label: "Owner" },
+    "pengelola@kosku.id": { password: "demo1234", role: "pengelola", label: "Pengelola" },
+    "penghuni@kosku.id": { password: "demo1234", role: "penghuni", label: "Penghuni" },
+  };
 
   const submit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -33,8 +40,13 @@ function LoginPage() {
       toast.error("Email dan password wajib diisi");
       return;
     }
-    setRole(role);
-    toast.success(`Berhasil masuk sebagai ${role}`);
+    const user = DEMO_USERS[email.trim().toLowerCase()];
+    if (!user || user.password !== password) {
+      toast.error("Email atau password salah");
+      return;
+    }
+    setRole(user.role);
+    toast.success(`Berhasil masuk sebagai ${user.label}`);
     navigate({ to: "/dashboard" });
   };
 
@@ -69,17 +81,6 @@ function LoginPage() {
                   <Input id="password" type="password" value={password} onChange={(e) => setPassword(e.target.value)} className="pl-9" placeholder="••••••••" />
                 </div>
               </div>
-              <div className="space-y-2">
-                <Label>Masuk sebagai</Label>
-                <Select value={role} onValueChange={(v) => setRoleLocal(v as Role)}>
-                  <SelectTrigger><SelectValue /></SelectTrigger>
-                  <SelectContent>
-                    <SelectItem value="owner">Owner</SelectItem>
-                    <SelectItem value="pengelola">Pengelola</SelectItem>
-                    <SelectItem value="penghuni">Penghuni</SelectItem>
-                  </SelectContent>
-                </Select>
-              </div>
               <Button type="submit" className="w-full bg-primary hover:bg-primary/90" size="lg">
                 Masuk
               </Button>
@@ -87,9 +88,11 @@ function LoginPage() {
 
             <div className="mt-6 rounded-lg border border-dashed border-border bg-muted/50 p-3 text-xs text-muted-foreground">
               <div className="font-semibold text-foreground">Demo Credentials</div>
-              <div className="mt-1">Email: <span className="font-mono">admin@kosku.id</span></div>
-              <div>Password: <span className="font-mono">demo1234</span></div>
-              <div className="mt-1 text-[11px]">Pilih peran apa pun untuk demo — tidak ada otentikasi nyata.</div>
+              <div className="mt-1">Owner: <span className="font-mono">admin@kosku.id</span></div>
+              <div>Pengelola: <span className="font-mono">pengelola@kosku.id</span></div>
+              <div>Penghuni: <span className="font-mono">penghuni@kosku.id</span></div>
+              <div className="mt-1">Password (semua): <span className="font-mono">demo1234</span></div>
+              <div className="mt-1 text-[11px]">Demo — peran ditentukan oleh akun, bukan dipilih dari UI.</div>
             </div>
           </CardContent>
         </Card>
