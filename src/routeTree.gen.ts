@@ -11,6 +11,7 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as TagihanRouteImport } from './routes/tagihan'
 import { Route as PenghuniRouteImport } from './routes/penghuni'
+import { Route as PengaduanRouteImport } from './routes/pengaduan'
 import { Route as LoginRouteImport } from './routes/login'
 import { Route as KamarRouteImport } from './routes/kamar'
 import { Route as DashboardRouteImport } from './routes/dashboard'
@@ -24,6 +25,11 @@ const TagihanRoute = TagihanRouteImport.update({
 const PenghuniRoute = PenghuniRouteImport.update({
   id: '/penghuni',
   path: '/penghuni',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PengaduanRoute = PengaduanRouteImport.update({
+  id: '/pengaduan',
+  path: '/pengaduan',
   getParentRoute: () => rootRouteImport,
 } as any)
 const LoginRoute = LoginRouteImport.update({
@@ -52,6 +58,7 @@ export interface FileRoutesByFullPath {
   '/dashboard': typeof DashboardRoute
   '/kamar': typeof KamarRoute
   '/login': typeof LoginRoute
+  '/pengaduan': typeof PengaduanRoute
   '/penghuni': typeof PenghuniRoute
   '/tagihan': typeof TagihanRoute
 }
@@ -60,6 +67,7 @@ export interface FileRoutesByTo {
   '/dashboard': typeof DashboardRoute
   '/kamar': typeof KamarRoute
   '/login': typeof LoginRoute
+  '/pengaduan': typeof PengaduanRoute
   '/penghuni': typeof PenghuniRoute
   '/tagihan': typeof TagihanRoute
 }
@@ -69,20 +77,36 @@ export interface FileRoutesById {
   '/dashboard': typeof DashboardRoute
   '/kamar': typeof KamarRoute
   '/login': typeof LoginRoute
+  '/pengaduan': typeof PengaduanRoute
   '/penghuni': typeof PenghuniRoute
   '/tagihan': typeof TagihanRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/dashboard' | '/kamar' | '/login' | '/penghuni' | '/tagihan'
+  fullPaths:
+    | '/'
+    | '/dashboard'
+    | '/kamar'
+    | '/login'
+    | '/pengaduan'
+    | '/penghuni'
+    | '/tagihan'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/dashboard' | '/kamar' | '/login' | '/penghuni' | '/tagihan'
+  to:
+    | '/'
+    | '/dashboard'
+    | '/kamar'
+    | '/login'
+    | '/pengaduan'
+    | '/penghuni'
+    | '/tagihan'
   id:
     | '__root__'
     | '/'
     | '/dashboard'
     | '/kamar'
     | '/login'
+    | '/pengaduan'
     | '/penghuni'
     | '/tagihan'
   fileRoutesById: FileRoutesById
@@ -92,6 +116,7 @@ export interface RootRouteChildren {
   DashboardRoute: typeof DashboardRoute
   KamarRoute: typeof KamarRoute
   LoginRoute: typeof LoginRoute
+  PengaduanRoute: typeof PengaduanRoute
   PenghuniRoute: typeof PenghuniRoute
   TagihanRoute: typeof TagihanRoute
 }
@@ -110,6 +135,13 @@ declare module '@tanstack/react-router' {
       path: '/penghuni'
       fullPath: '/penghuni'
       preLoaderRoute: typeof PenghuniRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/pengaduan': {
+      id: '/pengaduan'
+      path: '/pengaduan'
+      fullPath: '/pengaduan'
+      preLoaderRoute: typeof PengaduanRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/login': {
@@ -148,6 +180,7 @@ const rootRouteChildren: RootRouteChildren = {
   DashboardRoute: DashboardRoute,
   KamarRoute: KamarRoute,
   LoginRoute: LoginRoute,
+  PengaduanRoute: PengaduanRoute,
   PenghuniRoute: PenghuniRoute,
   TagihanRoute: TagihanRoute,
 }
