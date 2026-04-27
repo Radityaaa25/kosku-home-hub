@@ -9,38 +9,241 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as TagihanRouteImport } from './routes/tagihan'
+import { Route as PenghuniRouteImport } from './routes/penghuni'
+import { Route as PengaturanRouteImport } from './routes/pengaturan'
+import { Route as PengaduanRouteImport } from './routes/pengaduan'
+import { Route as LoginRouteImport } from './routes/login'
+import { Route as LaporanRouteImport } from './routes/laporan'
+import { Route as KamarRouteImport } from './routes/kamar'
+import { Route as DashboardRouteImport } from './routes/dashboard'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as SayaTagihanRouteImport } from './routes/saya.tagihan'
+import { Route as SayaProfilRouteImport } from './routes/saya.profil'
+import { Route as SayaPengaduanRouteImport } from './routes/saya.pengaduan'
 
+const TagihanRoute = TagihanRouteImport.update({
+  id: '/tagihan',
+  path: '/tagihan',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PenghuniRoute = PenghuniRouteImport.update({
+  id: '/penghuni',
+  path: '/penghuni',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PengaturanRoute = PengaturanRouteImport.update({
+  id: '/pengaturan',
+  path: '/pengaturan',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PengaduanRoute = PengaduanRouteImport.update({
+  id: '/pengaduan',
+  path: '/pengaduan',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const LoginRoute = LoginRouteImport.update({
+  id: '/login',
+  path: '/login',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const LaporanRoute = LaporanRouteImport.update({
+  id: '/laporan',
+  path: '/laporan',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const KamarRoute = KamarRouteImport.update({
+  id: '/kamar',
+  path: '/kamar',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DashboardRoute = DashboardRouteImport.update({
+  id: '/dashboard',
+  path: '/dashboard',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const SayaTagihanRoute = SayaTagihanRouteImport.update({
+  id: '/saya/tagihan',
+  path: '/saya/tagihan',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SayaProfilRoute = SayaProfilRouteImport.update({
+  id: '/saya/profil',
+  path: '/saya/profil',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SayaPengaduanRoute = SayaPengaduanRouteImport.update({
+  id: '/saya/pengaduan',
+  path: '/saya/pengaduan',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/dashboard': typeof DashboardRoute
+  '/kamar': typeof KamarRoute
+  '/laporan': typeof LaporanRoute
+  '/login': typeof LoginRoute
+  '/pengaduan': typeof PengaduanRoute
+  '/pengaturan': typeof PengaturanRoute
+  '/penghuni': typeof PenghuniRoute
+  '/tagihan': typeof TagihanRoute
+  '/saya/pengaduan': typeof SayaPengaduanRoute
+  '/saya/profil': typeof SayaProfilRoute
+  '/saya/tagihan': typeof SayaTagihanRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/dashboard': typeof DashboardRoute
+  '/kamar': typeof KamarRoute
+  '/laporan': typeof LaporanRoute
+  '/login': typeof LoginRoute
+  '/pengaduan': typeof PengaduanRoute
+  '/pengaturan': typeof PengaturanRoute
+  '/penghuni': typeof PenghuniRoute
+  '/tagihan': typeof TagihanRoute
+  '/saya/pengaduan': typeof SayaPengaduanRoute
+  '/saya/profil': typeof SayaProfilRoute
+  '/saya/tagihan': typeof SayaTagihanRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/dashboard': typeof DashboardRoute
+  '/kamar': typeof KamarRoute
+  '/laporan': typeof LaporanRoute
+  '/login': typeof LoginRoute
+  '/pengaduan': typeof PengaduanRoute
+  '/pengaturan': typeof PengaturanRoute
+  '/penghuni': typeof PenghuniRoute
+  '/tagihan': typeof TagihanRoute
+  '/saya/pengaduan': typeof SayaPengaduanRoute
+  '/saya/profil': typeof SayaProfilRoute
+  '/saya/tagihan': typeof SayaTagihanRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths:
+    | '/'
+    | '/dashboard'
+    | '/kamar'
+    | '/laporan'
+    | '/login'
+    | '/pengaduan'
+    | '/pengaturan'
+    | '/penghuni'
+    | '/tagihan'
+    | '/saya/pengaduan'
+    | '/saya/profil'
+    | '/saya/tagihan'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to:
+    | '/'
+    | '/dashboard'
+    | '/kamar'
+    | '/laporan'
+    | '/login'
+    | '/pengaduan'
+    | '/pengaturan'
+    | '/penghuni'
+    | '/tagihan'
+    | '/saya/pengaduan'
+    | '/saya/profil'
+    | '/saya/tagihan'
+  id:
+    | '__root__'
+    | '/'
+    | '/dashboard'
+    | '/kamar'
+    | '/laporan'
+    | '/login'
+    | '/pengaduan'
+    | '/pengaturan'
+    | '/penghuni'
+    | '/tagihan'
+    | '/saya/pengaduan'
+    | '/saya/profil'
+    | '/saya/tagihan'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  DashboardRoute: typeof DashboardRoute
+  KamarRoute: typeof KamarRoute
+  LaporanRoute: typeof LaporanRoute
+  LoginRoute: typeof LoginRoute
+  PengaduanRoute: typeof PengaduanRoute
+  PengaturanRoute: typeof PengaturanRoute
+  PenghuniRoute: typeof PenghuniRoute
+  TagihanRoute: typeof TagihanRoute
+  SayaPengaduanRoute: typeof SayaPengaduanRoute
+  SayaProfilRoute: typeof SayaProfilRoute
+  SayaTagihanRoute: typeof SayaTagihanRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/tagihan': {
+      id: '/tagihan'
+      path: '/tagihan'
+      fullPath: '/tagihan'
+      preLoaderRoute: typeof TagihanRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/penghuni': {
+      id: '/penghuni'
+      path: '/penghuni'
+      fullPath: '/penghuni'
+      preLoaderRoute: typeof PenghuniRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/pengaturan': {
+      id: '/pengaturan'
+      path: '/pengaturan'
+      fullPath: '/pengaturan'
+      preLoaderRoute: typeof PengaturanRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/pengaduan': {
+      id: '/pengaduan'
+      path: '/pengaduan'
+      fullPath: '/pengaduan'
+      preLoaderRoute: typeof PengaduanRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/login': {
+      id: '/login'
+      path: '/login'
+      fullPath: '/login'
+      preLoaderRoute: typeof LoginRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/laporan': {
+      id: '/laporan'
+      path: '/laporan'
+      fullPath: '/laporan'
+      preLoaderRoute: typeof LaporanRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/kamar': {
+      id: '/kamar'
+      path: '/kamar'
+      fullPath: '/kamar'
+      preLoaderRoute: typeof KamarRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/dashboard': {
+      id: '/dashboard'
+      path: '/dashboard'
+      fullPath: '/dashboard'
+      preLoaderRoute: typeof DashboardRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/': {
       id: '/'
       path: '/'
@@ -48,11 +251,43 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/saya/tagihan': {
+      id: '/saya/tagihan'
+      path: '/saya/tagihan'
+      fullPath: '/saya/tagihan'
+      preLoaderRoute: typeof SayaTagihanRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/saya/profil': {
+      id: '/saya/profil'
+      path: '/saya/profil'
+      fullPath: '/saya/profil'
+      preLoaderRoute: typeof SayaProfilRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/saya/pengaduan': {
+      id: '/saya/pengaduan'
+      path: '/saya/pengaduan'
+      fullPath: '/saya/pengaduan'
+      preLoaderRoute: typeof SayaPengaduanRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  DashboardRoute: DashboardRoute,
+  KamarRoute: KamarRoute,
+  LaporanRoute: LaporanRoute,
+  LoginRoute: LoginRoute,
+  PengaduanRoute: PengaduanRoute,
+  PengaturanRoute: PengaturanRoute,
+  PenghuniRoute: PenghuniRoute,
+  TagihanRoute: TagihanRoute,
+  SayaPengaduanRoute: SayaPengaduanRoute,
+  SayaProfilRoute: SayaProfilRoute,
+  SayaTagihanRoute: SayaTagihanRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
