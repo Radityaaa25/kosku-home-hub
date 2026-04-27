@@ -25,7 +25,14 @@ function LoginPage() {
   const navigate = useNavigate();
   const [email, setEmail] = useState("admin@kosku.id");
   const [password, setPassword] = useState("demo1234");
-  const [role, setRoleLocal] = useState<Role>("owner");
+
+  // Demo credential map — in a real app, role is resolved server-side from
+  // the authenticated user, never selected by the client.
+  const DEMO_USERS: Record<string, { password: string; role: Role; label: string }> = {
+    "admin@kosku.id": { password: "demo1234", role: "owner", label: "Owner" },
+    "pengelola@kosku.id": { password: "demo1234", role: "pengelola", label: "Pengelola" },
+    "penghuni@kosku.id": { password: "demo1234", role: "penghuni", label: "Penghuni" },
+  };
 
   const submit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -33,8 +40,13 @@ function LoginPage() {
       toast.error("Email dan password wajib diisi");
       return;
     }
-    setRole(role);
-    toast.success(`Berhasil masuk sebagai ${role}`);
+    const user = DEMO_USERS[email.trim().toLowerCase()];
+    if (!user || user.password !== password) {
+      toast.error("Email atau password salah");
+      return;
+    }
+    setRole(user.role);
+    toast.success(`Berhasil masuk sebagai ${user.label}`);
     navigate({ to: "/dashboard" });
   };
 

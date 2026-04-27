@@ -1,5 +1,4 @@
 import { useApp } from "@/lib/app-context";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Crown, Shield, User } from "lucide-react";
 import type { Role } from "@/lib/types";
 
@@ -15,32 +14,19 @@ const LABELS: Record<Role, string> = {
   penghuni: "Penghuni",
 };
 
+/**
+ * Read-only role badge. Role is determined at login and cannot be changed
+ * from the UI to prevent trivial client-side privilege escalation.
+ */
 export function RoleSwitcher() {
-  const { role, setRole } = useApp();
+  const { role } = useApp();
   const Icon = ICONS[role];
   return (
-    <div className="flex items-center gap-2">
-      <div className="hidden sm:flex h-9 w-9 items-center justify-center rounded-full bg-primary text-primary-foreground">
-        <Icon className="h-4 w-4" />
+    <div className="flex items-center gap-2 rounded-full border border-border bg-card px-3 py-1.5">
+      <div className="flex h-7 w-7 items-center justify-center rounded-full bg-primary text-primary-foreground">
+        <Icon className="h-3.5 w-3.5" />
       </div>
-      <Select value={role} onValueChange={(v) => setRole(v as Role)}>
-        <SelectTrigger className="w-[160px]">
-          <SelectValue />
-        </SelectTrigger>
-        <SelectContent>
-          {(Object.keys(LABELS) as Role[]).map((r) => {
-            const I = ICONS[r];
-            return (
-              <SelectItem key={r} value={r}>
-                <div className="flex items-center gap-2">
-                  <I className="h-4 w-4" />
-                  <span>{LABELS[r]}</span>
-                </div>
-              </SelectItem>
-            );
-          })}
-        </SelectContent>
-      </Select>
+      <span className="text-sm font-medium">{LABELS[role]}</span>
     </div>
   );
 }
