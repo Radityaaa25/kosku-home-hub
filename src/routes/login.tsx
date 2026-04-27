@@ -81,17 +81,6 @@ function LoginPage() {
                   <Input id="password" type="password" value={password} onChange={(e) => setPassword(e.target.value)} className="pl-9" placeholder="••••••••" />
                 </div>
               </div>
-              <div className="space-y-2">
-                <Label>Masuk sebagai</Label>
-                <Select value={role} onValueChange={(v) => setRoleLocal(v as Role)}>
-                  <SelectTrigger><SelectValue /></SelectTrigger>
-                  <SelectContent>
-                    <SelectItem value="owner">Owner</SelectItem>
-                    <SelectItem value="pengelola">Pengelola</SelectItem>
-                    <SelectItem value="penghuni">Penghuni</SelectItem>
-                  </SelectContent>
-                </Select>
-              </div>
               <Button type="submit" className="w-full bg-primary hover:bg-primary/90" size="lg">
                 Masuk
               </Button>
@@ -99,9 +88,11 @@ function LoginPage() {
 
             <div className="mt-6 rounded-lg border border-dashed border-border bg-muted/50 p-3 text-xs text-muted-foreground">
               <div className="font-semibold text-foreground">Demo Credentials</div>
-              <div className="mt-1">Email: <span className="font-mono">admin@kosku.id</span></div>
-              <div>Password: <span className="font-mono">demo1234</span></div>
-              <div className="mt-1 text-[11px]">Pilih peran apa pun untuk demo — tidak ada otentikasi nyata.</div>
+              <div className="mt-1">Owner: <span className="font-mono">admin@kosku.id</span></div>
+              <div>Pengelola: <span className="font-mono">pengelola@kosku.id</span></div>
+              <div>Penghuni: <span className="font-mono">penghuni@kosku.id</span></div>
+              <div className="mt-1">Password (semua): <span className="font-mono">demo1234</span></div>
+              <div className="mt-1 text-[11px]">Demo — peran ditentukan oleh akun, bukan dipilih dari UI.</div>
             </div>
           </CardContent>
         </Card>
